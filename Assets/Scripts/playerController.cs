@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     {
         // Движение ВЛЕВО-ВПРАВО (A/D keys)
         float horizontal = Input.GetAxis("Horizontal");
-        transform.Translate(horizontal * moveSpeed * Time.deltaTime, 0, 0);
+        transform.Translate(horizontal * -moveSpeed * Time.deltaTime, 0, 0);
 
         // Движение ВПЕРЕД-НАЗАД (W/S keys)
         float vertical = Input.GetAxis("Vertical");
