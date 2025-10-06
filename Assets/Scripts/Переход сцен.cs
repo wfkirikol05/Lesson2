@@ -2,20 +2,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayButton : MonoBehaviour
+namespace UI
 {
-    private Button playButton;
-
-    void Start()
+    public class PlayButton : MonoBehaviour
     {
-        playButton = GetComponent<Button>();
-        playButton.onClick.AddListener(OnPlayButtonClick);
-    }
+        private Button playButton;
 
-    void OnPlayButtonClick()
-    {
-        // Загружаем игровую сцену по имени
-        SceneManager.LoadScene("Игра");
+        void Start()
+        {
+            playButton = GetComponent<Button>();
+            playButton.onClick.AddListener(OnPlayButtonClick);
+        }
 
+        void OnPlayButtonClick()
+        {
+            SceneManager.LoadScene("Игра");
+        }
     }
 }
