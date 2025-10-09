@@ -3,29 +3,33 @@ using UnityEngine;
 public class DeathZone : MonoBehaviour
 {
     public Vector3 respawnPosition = new Vector3(0, 2, 0);
+    public int damage = 1; // Количество урона
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Object in death zone: " + other.name);
 
-        // Вариант 1: По имени (если тэги не работают)
-        if (other.name == "Player" || other.name.Contains("Player"))
-        {
-            RespawnPlayer(other.gameObject);
-            return;
-        }
+        PlayerController player = null;
 
-        // Вариант 2: По тэгу
+        // Ищем компонент PlayerController разными способами
         if (other.CompareTag("Player"))
         {
-            RespawnPlayer(other.gameObject);
-            return;
+            player = other.GetComponent<PlayerController>();
+        }
+        else if (other.transform.parent != null && other.transform.parent.CompareTag("Player"))
+        {
+            player = other.transform.parent.GetComponent<PlayerController>();
+        }
+        else
+        {
+            player = other.GetComponentInParent<PlayerController>();
         }
 
-        // Вариант 3: По родителю (если коллайдер на дочернем объекте)
-        if (other.transform.parent != null && other.transform.parent.CompareTag("Player"))
+        // Если нашли игрока, наносим урон и респавним
+        if (player != null)
         {
-            RespawnPlayer(other.transform.parent.gameObject);
+            player.TakeDamage(damage);
+            RespawnPlayer(player.gameObject);
         }
     }
 
