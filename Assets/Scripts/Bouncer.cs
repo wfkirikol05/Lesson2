@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bouncer : MonoBehaviour
 {
     [Header("Bounce Settings")]
-    public float bounceForce = 500f;
+    public float bounceForce = 2f;
     public float cooldownTime = 0.5f; // Задержка между прыжками
 
     [Header("Effects")]
